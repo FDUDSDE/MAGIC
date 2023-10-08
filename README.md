@@ -1,13 +1,13 @@
 # MAGIC
 
 > **Note**
-> <span style="color:blue"> Pre-processed datasets for **StreamSpot** and **Unicorn Wget** and their corresponding **log parsers** will be released as soon as possible. The current version are not ready for one-click run and is not compatible with `DGL 1.0.0`.</span>
+> <span style="color:blue"> Pre-processed datasets for **StreamSpot** and **Unicorn Wget** and their corresponding **log parsers** will be released as soon as possible. The current version are not ready for one-click run and is not compatible with `DGL 1.0.0`. Additional information concerning DARPA TC labeling will also be included soon.</span>
 
 This is official code for the USENIX Security 24 paper:
 
 **MAGIC: Detecting Advanced Persistent Threats via Masked Graph Representation Learning**
 
-![](./figs/overview.png)
+![](./figs/model.pdf)
 
 In this paper, we introduce MAGIC, a novel and flexible self-supervised approach for multi-granularity APT detection. MAGIC leverages masked graph representation learning to model benign system entities and behaviors, performing efficient deep feature extraction and structure abstraction on provenance graphs. By ferreting out anomalous system behaviors via outlier detection methods, MAGIC is able to perform both system entity level and batched log level detection. MAGIC is specially designed to handle concept drift with a model adaption mechanism and successfully applies to universal conditions and detection scenarios.
 
@@ -42,7 +42,9 @@ To pre-process these datasets from scratch, do as the follows:
   - Download and unzip `ta1-theia-e3-official-6r.json.tar.gz` into `data/theia/`.
   - Download and unzip `ta1-cadets-e3-official-2.json.tar.gz` and `ta1-cadets-e3-official.json.tar.gz` into `data/cadets/`.
 
-Meanwhile, we elaborated an alternative labeling methodology on the DARPA TC datasets in this paper(Appendix G). We also release the corresponding ground truth labels in `data/alternative_labels/` and a `labeling.pdf` file describing this labeling methodology.
+Meanwhile, we elaborated an alternative labeling methodology on the DARPA TC datasets in this paper (Appendix G). We also release the corresponding ground truth labels in `data/alternative_labels/` and a `labeling.pdf` file describing this labeling methodology.
+
+> These additionaly materials will be released soon.
 
 
 ## Run
