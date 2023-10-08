@@ -7,7 +7,7 @@ This is official code for the USENIX Security 24 paper:
 
 **MAGIC: Detecting Advanced Persistent Threats via Masked Graph Representation Learning**
 
-![](./figs/model.pdf)
+![](./figs/model.png)
 
 In this paper, we introduce MAGIC, a novel and flexible self-supervised approach for multi-granularity APT detection. MAGIC leverages masked graph representation learning to model benign system entities and behaviors, performing efficient deep feature extraction and structure abstraction on provenance graphs. By ferreting out anomalous system behaviors via outlier detection methods, MAGIC is able to perform both system entity level and batched log level detection. MAGIC is specially designed to handle concept drift with a model adaption mechanism and successfully applies to universal conditions and detection scenarios.
 
