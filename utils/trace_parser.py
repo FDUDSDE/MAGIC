@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 import random
@@ -39,7 +40,7 @@ pattern_file_name = re.compile(r'map\":\{\"path\":\"(.*?)\"')
 pattern_process_name = re.compile(r'map\":\{\"name\":\"(.*?)\"')
 pattern_netflow_object_name = re.compile(r'remoteAddress\":\"(.*?)\"')
 
-adversarial = 'BFP'
+adversarial = 'None'
 
 
 def read_single_graph(dataset, malicious, path, test=False):
@@ -276,6 +277,12 @@ def read_graphs(dataset):
     pkl.dump([nx.node_link_data(train_g) for train_g in train_gs], open('../data/{}/train.pkl'.format(dataset), 'wb'))
     pkl.dump([nx.node_link_data(test_g) for test_g in test_gs], open('../data/{}/test.pkl'.format(dataset), 'wb'))
 
+
 if __name__ == '__main__':
-    read_graphs('trace')
+    parser = argparse.ArgumentParser(description='CDM Parser')
+    parser.add_argument("--dataset", type=str, default="trace")
+    args = parser.parse_args()
+    if args.dataset not in ['trace', 'theia', 'cadets']:
+        raise NotImplementedError
+    read_graphs(args.dataset)
 

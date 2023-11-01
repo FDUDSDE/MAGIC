@@ -49,7 +49,7 @@ class WgetDataset(dgl.data.DGLDataset):
     def __init__(self, name):
         super(WgetDataset, self).__init__(name=name)
         if name == 'wget':
-            path = './data/unicorn/final'
+            path = './data/wget/final'
             num_graphs = 150
             self.graphs = []
             self.labels = []

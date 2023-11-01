@@ -3,7 +3,7 @@ import argparse
 
 def build_args():
     parser = argparse.ArgumentParser(description="MAGIC")
-    parser.add_argument("--dataset", type=str, default="trace")
+    parser.add_argument("--dataset", type=str, default="wget")
     parser.add_argument("--device", type=int, default=-1)
     parser.add_argument("--lr", type=float, default=0.001,
                         help="learning rate")
