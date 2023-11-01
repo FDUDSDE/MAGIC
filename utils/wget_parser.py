@@ -776,7 +776,12 @@ if __name__ == "__main__":
     args.output = '../data/wget/processed/'
     args.final_output = '../data/wget/final/'
     args.noencode = False
-
+    if not os.path.exists(args.input):
+        os.mkdir(args.input)
+    if not os.path.exists(args.output):
+        os.mkdir(args.output)
+    if not os.path.exists(args.final_output):
+        os.mkdir(args.final_output)
     CONSOLE_ARGUMENTS = args
 
     if args.verbose:
