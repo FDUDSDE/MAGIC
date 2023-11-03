@@ -1,7 +1,7 @@
 # MAGIC
 
 > **Note**
-> <span style="color:blue"> Log parser for the **Unicorn Wget** dataset is released. The **StreamSpot** log parser will be released soon.</span>
+> <span style="color:blue"> Log parsers and pre-processed data archives for the **StreamSpot** dataset and the **Unicorn Wget** dataset are released.</span>
 
 This is official code for the USENIX Security 24 paper:
 
@@ -29,10 +29,8 @@ Due to the enormous size of these datasets, we include our **pre-processed** dat
 To pre-process these datasets from scratch, do as the follows:
 
 - **StreamSpot Dataset**
-  - Download and unzip `all.tar.gz` from [StreamSpot](https://github.com/sbustreamspot/sbustreamspot-data), which includes a single data file `all.tsv`.
-  - Copy `all.tsv` to `data/streamspot`
-  - Run `utils/streamspot_parser.py`. This will result in 600 graph data files in the JSON format. 
-    > `utils/streamspot_parser.py` will be released soon.
+  - Download and unzip `all.tar.gz` from [StreamSpot](https://github.com/sbustreamspot/sbustreamspot-data), which includes a single data file `all.tsv`. Copy `all.tsv` to `data/streamspot`.
+  - Go to directory `utils` and run `streamspot_parser.py`. This will result in 600 graph data files in the JSON format. 
   - During training and evaluation, function `load_batch_level_dataset` in `utils/loaddata.py` will automatically read and label these graphs and store them into the compressed data archive `graphs.pkl` for efficient data loading.
 - **Unicorn Wget Dataset**
   - Download and unzip `attack_baseline.tar.gz` and `benign.tar.gz` from [Wget](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IA8UOS). Copy all `.log` files into `data/wget/raw/`. Ignore contents in `base` and `stream`.
@@ -45,7 +43,7 @@ To pre-process these datasets from scratch, do as the follows:
   - Download and unzip `ta1-cadets-e3-official-2.json.tar.gz` and `ta1-cadets-e3-official.json.tar.gz` into `data/cadets/`.
   - Go to directory `utils` and run `trace_parser.py` with argument `--dataset`. Valid choices are `trace`, `theia`, and `cadets`.
 
-Meanwhile, we elaborated an alternative labeling methodology on the DARPA TC datasets in this paper(Appendix G). We also release the corresponding ground truth labels in `data/alternative_labels/` and a `labeling.pdf` file describing this labeling methodology.
+Meanwhile, we elaborated an alternative labeling methodology on the DARPA TC datasets in our paper(Appendix G). We also provided the corresponding ground truth labels in the same appendix section for sub-datasets E3-Trace, E3-THEIA and E3-CADETS.
 
 
 ## Run
