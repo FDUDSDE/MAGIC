@@ -216,11 +216,11 @@ def evaluate_entity_level_using_knn(dataset, x_train, x_test, y_test):
     fp = 0
     for i in range(len(y_test)):
         if y_test[i] == 1.0 and score[i] >= best_thres:
-            tn += 1
+            tp += 1
         if y_test[i] == 1.0 and score[i] < best_thres:
             fn += 1
         if y_test[i] == 0.0 and score[i] < best_thres:
-            tp += 1
+            tn += 1
         if y_test[i] == 0.0 and score[i] >= best_thres:
             fp += 1
     print('AUC: {}'.format(auc))
