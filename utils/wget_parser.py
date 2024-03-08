@@ -716,7 +716,7 @@ def process_graph(name, threshold):
     for num, edge in enumerate(graph):
         cnt += 1
         src, dst, src_type, dst_type, edge_type = edge[:5]
-        if True:# src_type in valid_node_type and dst_type in valid_node_type:
+        if src_type in valid_node_type and dst_type in valid_node_type:
             if not result_graph.has_node(src):
                 result_graph.add_node(src, type=src_type)
             if not result_graph.has_node(dst):
