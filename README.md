@@ -1,8 +1,5 @@
 # MAGIC
 
-> **Note**
-> <span style="color:blue"> Log parsers and pre-processed data archives for the **StreamSpot** dataset and the **Unicorn Wget** dataset are released.</span>
-
 This is official code for the USENIX Security 24 paper:
 
 **MAGIC: Detecting Advanced Persistent Threats via Masked Graph Representation Learning**
@@ -42,6 +39,7 @@ To pre-process these datasets from scratch, do as the follows:
   - Download and unzip `ta1-theia-e3-official-6r.json.tar.gz` into `data/theia/`.
   - Download and unzip `ta1-cadets-e3-official-2.json.tar.gz` and `ta1-cadets-e3-official.json.tar.gz` into `data/cadets/`.
   - Go to directory `utils` and run `trace_parser.py` with argument `--dataset`. Valid choices are `trace`, `theia`, and `cadets`.
+  - MAGIC is evaluated on the DARPA TC datasets using the ThreaTrace label. Go to [ThreaTrace](https://github.com/threaTrace-detector/threaTrace), download the .txt groundtruth files from the folder "groundtruth" and put them into the corresponding dataset folder of MAGIC. For example, `theia.txt` into `data/theia/theia.txt`. 
 
 Meanwhile, we elaborated an alternative labeling methodology on the DARPA TC datasets in our paper(Appendix G). We also provided the corresponding ground truth labels in the same appendix section for sub-datasets E3-Trace, E3-THEIA and E3-CADETS.
 
