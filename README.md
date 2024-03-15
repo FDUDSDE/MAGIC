@@ -21,8 +21,6 @@ We use two public datasets for evaluation on *batched log level detection*: `Str
 We use the DARPA Transparent Computing Engagement 3 sub-datasets `E3-Trace`, `E3-THEIA` and `E3-CADETS` for evaluation on *system entity level detection*.
 Due to the enormous size of these datasets, we include our **pre-processed** datasets in the `data/` folder. In each sub-directory under the `.data` folder, there is a `.zip` file. You need to **unzip** these `.zip` files into one `graphs.pkl` for each dataset. 
 
-> Pre-processed datasets for **StreamSpot** and **Unicorn Wget** will be released soon.
-
 To pre-process these datasets from scratch, do as the follows:
 
 - **StreamSpot Dataset**
