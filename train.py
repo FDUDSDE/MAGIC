@@ -71,7 +71,7 @@ def main(main_args):
             for i in range(n_train):
                 g = load_entity_level_dataset(dataset_name, 'train', i).to(device)
                 model.train()
-                loss, _ = model(g)
+                loss = model(g)
                 loss /= n_train
                 optimizer.zero_grad()
                 epoch_loss += loss.item()

@@ -40,8 +40,6 @@ pattern_file_name = re.compile(r'map\":\{\"path\":\"(.*?)\"')
 pattern_process_name = re.compile(r'map\":\{\"name\":\"(.*?)\"')
 pattern_netflow_object_name = re.compile(r'remoteAddress\":\"(.*?)\"')
 
-adversarial = 'None'
-
 
 def read_single_graph(dataset, malicious, path, test=False):
     global node_type_cnt, edge_type_cnt
@@ -86,32 +84,12 @@ def read_single_graph(dataset, malicious, path, test=False):
         dst_type_id = node_type_dict[dst_type]
         edge_type_id = edge_type_dict[edge_type]
         if src not in node_map:
-            if test:
-                if adversarial == 'MFE' or adversarial == 'MCE':
-                    if src in malicious:
-                        src_type_id = node_type_dict['FILE_OBJECT_FILE']
-            if not test:
-                if adversarial == 'BFP':
-                    if src not in malicious:
-                        i = random.randint(1, 20)
-                        if i == 1:
-                            src_type_id = node_type_dict['NetFlowObject']
             node_map[src] = node_cnt
             g.add_node(node_cnt, type=src_type_id)
             node_list.append(src)
             node_type_map[src] = src_type
             node_cnt += 1
         if dst not in node_map:
-            if test:
-                if adversarial == 'MFE' or adversarial == 'MCE':
-                    if dst in malicious:
-                        dst_type_id = node_type_dict['FILE_OBJECT_FILE']
-            if not test:
-                if adversarial == 'BFP':
-                    if dst not in malicious:
-                        i = random.randint(1, 20)
-                        if i == 1:
-                            dst_type_id = node_type_dict['NetFlowObject']
             node_map[dst] = node_cnt
             g.add_node(node_cnt, type=dst_type_id)
             node_type_map[dst] = dst_type
@@ -119,25 +97,6 @@ def read_single_graph(dataset, malicious, path, test=False):
             node_cnt += 1
         if not g.has_edge(node_map[src], node_map[dst]):
             g.add_edge(node_map[src], node_map[dst], type=edge_type_id)
-    if (adversarial == 'MSE' or adversarial == 'MCE') and test:
-        for i, node in enumerate(node_list):
-            if node in malicious:
-                while True:
-                    another_node = random.choice(node_list)
-                    if 'FILE_OBJECT' in node_type_map[node] and node_type_map[another_node] == 'SUBJECT_PROCESS':
-                        g.add_edge(node_map[another_node], node_map[node], type=edge_type_dict['EVENT_WRITE'])
-                        print(node, another_node)
-                        break
-                    if node_type_map[node] == 'SUBJECT_PROCESS' and node_type_map[another_node] == 'FILE_OBJECT_FILE':
-                        g.add_edge(node_map[another_node], node_map[node], type=edge_type_dict['EVENT_READ'])
-                        print(node, another_node)
-                        break
-                    if node_type_map[node] == 'NetFlowObject' and node_type_map[another_node] == 'SUBJECT_PROCESS':
-                        g.add_edge(node_map[another_node], node_map[node], type=edge_type_dict['EVENT_CONNECT'])
-                        print(node, another_node)
-                        break
-                    if not 'FILE_OBJECT' in node_type_map[node] and not node_type_map[node] == 'SUBJECT_PROCESS' and not node_type_map[node] == 'NetFlowObject':
-                        break
     return node_map, g
 
 

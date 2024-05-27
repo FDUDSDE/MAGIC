@@ -36,6 +36,7 @@ To pre-process these datasets from scratch, do as the follows:
   - Download and unzip `ta1-trace-e3-official-1.json.tar.gz` into `data/trace/`.
   - Download and unzip `ta1-theia-e3-official-6r.json.tar.gz` into `data/theia/`.
   - Download and unzip `ta1-cadets-e3-official-2.json.tar.gz` and `ta1-cadets-e3-official.json.tar.gz` into `data/cadets/`.
+  - **Do not delete log files that are not directly used for training and test purpose (e.g. ta1-theia-e3-official-6r.4-7.json). These files provide entity definitions for subsequent event records, including definitions for malicious entities.**
   - Go to directory `utils` and run `trace_parser.py` with argument `--dataset`. Valid choices are `trace`, `theia`, and `cadets`.
   - MAGIC is evaluated on the DARPA TC datasets using the ThreaTrace label. Go to [ThreaTrace](https://github.com/threaTrace-detector/threaTrace), download the .txt groundtruth files from the folder "groundtruth" and put them into the corresponding dataset folder of MAGIC. For example, `theia.txt` into `data/theia/theia.txt`. 
 
