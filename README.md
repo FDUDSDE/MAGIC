@@ -76,4 +76,16 @@ For more running options, please refer to `utils/config.py`
  
 If you make advantage of MAGIC in your research, please cite the following in your manuscript:
 
-> Will be released soon.
+```
+@inproceedings{jia2024magic,
+  title        = {MAGIC: Detecting Advanced Persistent Threats via Masked Graph Representation Learning},
+  author       = {Zian Jia and
+                  Yun Xiong and
+                  Yuhong Nan and
+                  Yao Zhang and
+                  Jinjing Zhao and
+                  Mi Wen},
+  booktitle    = {33rd USENIX Security Symposium, USENIX Security 2024},
+  year         = {2024},
+}
+```
