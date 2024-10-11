@@ -787,7 +787,13 @@ if __name__ == "__main__":
     if args.verbose:
         logging.basicConfig(filename=args.log, level=logging.DEBUG)
     cnt = 0
-    for fname in os.listdir(args.input):
+    fname_list = []
+    for i in range(150):
+        if i < 25:
+            fname_list.append('wget-baseline-attack-' + str(i) + '.log')
+        else:
+            fname_list.append('wget-normal-' + str(i - 25) + '.log')
+    for fname in fname_list:
         cnt += 1
         node_map = dict()
         parse_all_nodes(args.input + '/{}'.format(fname), node_map)
