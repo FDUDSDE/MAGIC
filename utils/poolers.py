@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch
 
 
 class Pooling(nn.Module):
@@ -31,13 +32,17 @@ class Pooling(nn.Module):
                     raise NotImplementedError
             else:
                 mask = (graph.ndata['type'] == t[0])
+                result = []
                 for i in range(1, len(t)):
-                    mask |= (graph.ndata['type'] == t[i])
-                if self.pooler == 'mean':
-                    return feat[mask].mean(0, keepdim=True)
-                elif self.pooler == 'sum':
-                    return feat[mask].sum(0, keepdim=True)
-                elif self.pooler == 'max':
-                    return feat[mask].max(0, keepdim=True)
-                else:
-                    raise NotImplementedError
+                    mask = (graph.ndata['type'] == t[i])
+                    if self.pooler == 'mean':
+                        result.append(feat[mask].mean(0, keepdim=True))
+                    elif self.pooler == 'sum':
+                        result.append(feat[mask].sum(0, keepdim=True))
+                    elif self.pooler == 'max':
+                        result.append(eat[mask].max(0, keepdim=True))
+                    else:
+                        raise NotImplementedError
+                result = torch.cat(result, dim=-1)
+                return result
+                
