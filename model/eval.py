@@ -25,7 +25,7 @@ def batch_level_evaluation(model, pooler, device, method, dataset, n_dim=0, e_di
             if dataset != 'wget':
                 out = pooler(g, out).cpu().numpy()
             else:
-                out = pooler(g, out, [2]).cpu().numpy()
+                out = pooler(g, out, [0, 1, 2, 3, 5]).cpu().numpy()
             y_list.append(label)
             x_list.append(out)
     x = np.concatenate(x_list, axis=0)
@@ -113,7 +113,7 @@ def evaluate_batch_level_using_knn(repeat, dataset, embeddings, labels):
         print('FP: {}+{}'.format(np.mean(fp_list), np.std(fp_list)))
         return np.mean(auc_list), np.std(auc_list)
     else:
-        set_random_seed(2022)
+        set_random_seed(0)
         np.random.shuffle(benign_idx)
         np.random.shuffle(attack_idx)
         x_train = x[benign_idx[:train_count]]
