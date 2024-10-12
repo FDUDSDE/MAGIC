@@ -1,5 +1,6 @@
 import torch.nn as nn
 import torch
+import numpy as np
 
 
 class Pooling(nn.Module):
@@ -7,11 +8,10 @@ class Pooling(nn.Module):
         super(Pooling, self).__init__()
         self.pooler = pooler
 
-    def forward(self, graph, feat, t=None):
-        feat = feat
+    def forward(self, graph, feat, n_types=None):
         # Implement node type-specific pooling
         with graph.local_scope():
-            if t is None:
+            if not n_types:
                 if self.pooler == 'mean':
                     return feat.mean(0, keepdim=True)
                 elif self.pooler == 'sum':
@@ -20,27 +20,18 @@ class Pooling(nn.Module):
                     return feat.max(0, keepdim=True)
                 else:
                     raise NotImplementedError
-            elif isinstance(t, int):
-                mask = (graph.ndata['type'] == t)
-                if self.pooler == 'mean':
-                    return feat[mask].mean(0, keepdim=True)
-                elif self.pooler == 'sum':
-                    return feat[mask].sum(0, keepdim=True)
-                elif self.pooler == 'max':
-                    return feat[mask].max(0, keepdim=True)
-                else:
-                    raise NotImplementedError
             else:
-                mask = (graph.ndata['type'] == t[0])
                 result = []
-                for i in range(1, len(t)):
-                    mask = (graph.ndata['type'] == t[i])
-                    if self.pooler == 'mean':
+                for i in range(n_types):
+                    mask = (graph.ndata['type'] == i)
+                    if not mask.any():
+                        result.append(torch.zeros((1, feat.shape[-1]), device=feat.device))
+                    elif self.pooler == 'mean':
                         result.append(feat[mask].mean(0, keepdim=True))
                     elif self.pooler == 'sum':
                         result.append(feat[mask].sum(0, keepdim=True))
                     elif self.pooler == 'max':
-                        result.append(eat[mask].max(0, keepdim=True))
+                        result.append(feat[mask].max(0, keepdim=True))
                     else:
                         raise NotImplementedError
                 result = torch.cat(result, dim=-1)
