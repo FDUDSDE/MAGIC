@@ -25,13 +25,13 @@ def batch_level_evaluation(model, pooler, device, method, dataset, n_dim=0, e_di
             if dataset != 'wget':
                 out = pooler(g, out).cpu().numpy()
             else:
-                out = pooler(g, out, [0, 1, 2, 3, 5]).cpu().numpy()
+                out = pooler(g, out, n_types=data['n_feat']).cpu().numpy()
             y_list.append(label)
             x_list.append(out)
     x = np.concatenate(x_list, axis=0)
     y = np.array(y_list)
     if 'knn' in method:
-        test_auc, test_std = evaluate_batch_level_using_knn(-1, dataset, x, y)
+        test_auc, test_std = evaluate_batch_level_using_knn(100, dataset, x, y)
     else:
         raise NotImplementedError
     return test_auc, test_std
@@ -64,8 +64,8 @@ def evaluate_batch_level_using_knn(repeat, dataset, embeddings, labels):
             y_test = np.concatenate([y[benign_idx[train_count:]], y[attack_idx]], axis=0)
             x_train_mean = x_train.mean(axis=0)
             x_train_std = x_train.std(axis=0)
-            x_train = (x_train - x_train_mean) / x_train_std
-            x_test = (x_test - x_train_mean) / x_train_std
+            x_train = (x_train - x_train_mean) / (x_train_std + 1e-6)
+            x_test = (x_test - x_train_mean) / (x_train_std + 1e-6)
 
             nbrs = NearestNeighbors(n_neighbors=n_neighbors)
             nbrs.fit(x_train)
